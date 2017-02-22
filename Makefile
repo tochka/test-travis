@@ -19,7 +19,7 @@ clear:
 build_artifacts: clear
 	GOOS=linux GOARCH=amd64 go build -o build/linux_x64/test
 	GOOS=linux GOARCH=386 go build -o build/linux_x86/test
-	GOOS=windows GOARCH=amd64 go build -o build/windws_x64/test.exe
+	GOOS=windows GOARCH=amd64 go build -o build/windows_x64/test.exe
 	GOOS=windows GOARCH=386 go build -o build/windows_x86/test.exe
 
 build_docker:
