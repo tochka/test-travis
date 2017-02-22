@@ -2,9 +2,10 @@ sudo: required
 
 service:
         - docker
+
 env:
         global:
-                - IMAGENAME=tocka/travis_test
+                - GIT_COMMIT=$TRAVIS_COMMIT
 language: go
 
 go:
@@ -12,6 +13,14 @@ go:
 
 before_install:
         - docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD"
+        - @if [ -n "$($TRAVIS_TAG)" ]; then
+                GIT_BRANCH=$TRAVIS_BRANCH
+          else
+                GIT_BRANCH=$TRAVIS_TAG
+          fi
+
+install:
+          - echo $GIT_COMMIT $GIT_BRANCH
 script:
         - make build_artifacts
         - make build_docker
