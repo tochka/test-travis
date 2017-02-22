@@ -1,5 +1,5 @@
 
-ARTF = test
+ARTF =test
 IMAGENAME=$(ARTF)
 DOCKERHUB_REPOSITORY=tochka/$(IMAGENAME)
 
