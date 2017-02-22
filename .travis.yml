@@ -1,0 +1,19 @@
+sudo: required
+
+service:
+        - docker
+env:
+        global:
+                - IMAGENAME=tocka/travis_test
+language: go
+
+go:
+        - 1.7.x
+
+before_install:
+        - docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD"
+script:
+        - make build_artifacts
+        - make build_docker
+        - make docker_dockerhub_tag
+        - make docker_dockerhub_push
