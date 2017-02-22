@@ -15,9 +15,9 @@ before_install:
         - echo "branch:" $TRAVIS_BRANCH "tag:" $TRAVIS_TAG;
         - docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD"
         - 'if [ -z "${TRAVIS_TAG}" ]; then
-               export GIT_BRANCH=$(TRAVIS_BRANCH);
+               export GIT_BRANCH=$TRAVIS_BRANCH;
           else
-               export GIT_BRANCH=$(TRAVIS_TAG);
+               export GIT_BRANCH=$TRAVIS_TAG;
           fi'
 
 install:
