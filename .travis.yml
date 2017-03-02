@@ -19,7 +19,7 @@ install:
         - echo $GIT_COMMIT $GIT_BRANCH;
 script:
         - make build_artifacts
-        - 'if [ "$TRAVIS_OS_NAME" = "linux"]; then
+        - 'if [ "$TRAVIS_OS_NAME" = "linux" ]; then
                 make build_docker;
                 make docker_dockerhub_publish;
           fi'
