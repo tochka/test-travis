@@ -13,7 +13,9 @@ env:
   - GIT_COMMIT=$TRAVIS_COMMIT
   - GIT_BRANCH=$TRAVIS_BRANCH
 before_install:
-        - docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD"
+        - 'if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
+                docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD";
+           fi'
 install:
         - echo $GIT_COMMIT $GIT_BRANCH;
 script:
