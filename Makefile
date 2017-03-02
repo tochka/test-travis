@@ -16,7 +16,7 @@ define tag_docker
 clear:
 	rm -rf build
 build_artifacts: clear
-	go build -o /build/travis-test/test
+	go build -o build/travis-test/test
 	tar -zcvf $(TRAVIS_OS_NAME)-amd64.tar.gz -C build/ .
 	ls -l
 
