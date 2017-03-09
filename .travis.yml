@@ -1,4 +1,7 @@
 matrix:
+  exclude:
+    # exclude default build
+    - dummy: true
   include:
 # DOCKER 
     - os: linux
