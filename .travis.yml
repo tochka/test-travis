@@ -1,22 +1,25 @@
 sudo: required
 services:
-- docker
+        - docker
+language: go
+go:
+        - 1.7.x
 env:
   global:
   - GIT_COMMIT=$TRAVIS_COMMIT
   - GIT_BRANCH=$TRAVIS_BRANCH
-language: go
-go:
-- 1.7.x
 before_install:
-- docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD"
+        - 'if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
+                docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD";
+           fi'
 install:
-- echo $GIT_COMMIT $GIT_BRANCH;
+        - echo $GIT_COMMIT $GIT_BRANCH;
 script:
-- make build_artifacts
-- make build_docker
-- make docker_dockerhub_tag
-- make docker_dockerhub_push
+        - make build_artifacts
+        - 'if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+                make build_docker;
+                make docker_dockerhub_publish;
+          fi'
 deploy:
   provider: releases
   api_key:
@@ -31,4 +34,4 @@ deploy:
 branches:
   only:
   - master
-  - /^v\d+\.\d+$/
+  - /^v\d+/

@@ -2,10 +2,9 @@
 ARTF =test
 IMAGENAME=$(ARTF)
 DOCKERHUB_REPOSITORY=tochka/$(IMAGENAME)
-
+OS = $(shell uname -s) 
 
 define tag_docker
-	@echo "git commit: $(GIT_BRANCH)"
 	@if [ "$(GIT_BRANCH)" = "master" ]; then \
 		docker tag $(IMAGENAME) $(1):latest; \
 	fi
@@ -33,8 +32,6 @@ build_artifacts: clear build/windows-amd64.zip build/macosx-amd64.tar.gz build/l
 build_docker:
 	docker build -t $(IMAGENAME) --build-arg GIT_COMMIT=$(GIT_COMMIT) --build-arg GIT_BRANCH=$(GIT_BRANCH) .
 
-docker_dockerhub_tag:
+docker_dockerhub_publish:
 	$(call tag_docker, $(DOCKERHUB_REPOSITORY))
-
-docker_dockerhub_push:
 	docker push $(DOCKERHUB_REPOSITORY)
