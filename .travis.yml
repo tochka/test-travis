@@ -41,7 +41,6 @@ script:
         - make test_all
         - make build_artifact
         - 'if [ "$TARGET_OS" = "linux" ]; then
-          #   make build_docker;
                 make test_docker;
           fi'
 deploy:
