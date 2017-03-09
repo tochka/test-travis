@@ -16,11 +16,19 @@ define tag_docker
 
 clear:
 	rm -rf build
-build_artifacts: clear
-	GOOS=linux GOARCH=amd64 go build -o build/linux_x64/test
-	GOOS=linux GOARCH=386 go build -o build/linux_x86/test
-	GOOS=windows GOARCH=amd64 go build -o build/windows_x64/test.exe
-	GOOS=windows GOARCH=386 go build -o build/windows_x86/test.exe
+build/windows-amd64.zip:
+	GOOS=windows GOARCH=amd64 go build  --ldflags '-extldflags "-static"' -o build/windows-amd64/$(ARTF)/$(ARTF).exe
+	cd build/windows-amd64 &&	zip -r ../windows-amd64.zip . &&	cd ../..
+	
+build/macosx-amd64.tar.gz:
+	GOOS=darwin GOARCH=amd64 go build -o build/macosx-amd64/$(ARTF)/$(ARTF)
+	tar -zcvf build/macosx-amd64.tar.gz -C build/macosx-amd64/ .
+	
+build/linux-amd64.tar.gz:
+	GOOS=linux GOARCH=amd64 go build -o build/linux-amd64/$(ARTF)/$(ARTF)
+	tar -zcvf build/linux-amd64.tar.gz -C build/linux-amd64/ .
+	
+build_artifacts: clear build/windows-amd64.zip build/macosx-amd64.tar.gz build/linux-amd64.tar.gz
 
 build_docker:
 	docker build -t $(IMAGENAME) --build-arg GIT_COMMIT=$(GIT_COMMIT) --build-arg GIT_BRANCH=$(GIT_BRANCH) .
