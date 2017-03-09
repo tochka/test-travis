@@ -28,7 +28,8 @@ build_artifact:
 		echo "WINDOWS"; \
 		mv build/$(ARTF)/$(ARTF) build/$(ARTF)/$(ARTF).exe; \
 		cd build/ && zip -r windows-amd64.zip . && cd ..; \
-	else \
+	fi
+	@if [ "$(TARGET_OS)" != "windows" ]; then \
 		HUMAN_NAME=["$(TARGET_OS)" = "darwin" && "macos" || "linux"; \
 		echo "NOT WINDOWS $(HUMAN_NAME)"; \		
 		tar -zcvf build/$(HUMAN_NAME)-amd64.tar.gz -C build/ .; \
