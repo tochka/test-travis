@@ -1,36 +1,55 @@
-sudo: required
-services:
-        - docker
+matrix:
+  include:
+# DOCKER 
+    - os: linux
+      sudo: required
+      services:
+        - docker  
+      env:
+        global:
+          - GIT_COMMIT=$TRAVIS_COMMIT
+          - GIT_BRANCH=$TRAVIS_BRANCH
+          - TARGET_OS=linux
+    - os: linux
+      env:
+        global:
+         - TARGET_OS=windows
+    - os: linux
+      env:
+        global:
+         - TARGET_OS=darwin         
+      
 language: go
 go:
         - 1.7.x
-env:
-  global:
-  - GIT_COMMIT=$TRAVIS_COMMIT
-  - GIT_BRANCH=$TRAVIS_BRANCH
+
 before_install:
-        - 'if [ "$TRAVIS_OS_NAME" = "linux" ]; then 
+        - 'if [ "$TARGET" = "LINUX" ]; then 
                 docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD";
            fi'
 install:
-        - echo $GIT_COMMIT $GIT_BRANCH;
+        - make get
 script:
-        - make build_artifacts
-        - 'if [ "$TRAVIS_OS_NAME" = "linux" ]; then
+        - make test_all
+        - make build_artifact
+        - 'if [ "$TARGET_OS" = "linux" ]; then
                 make build_docker;
-                make docker_dockerhub_publish;
+                make test_docker;
           fi'
 deploy:
-  provider: releases
-  api_key:
-    secure: UX6lS6ApVSzuC3TU/KTImouwetB+JWNRrUi9rkDRdaT+d32LKVs+V1rkIDav2JfXIBuAR7I0tedG7NUoHYzJy9Zv9NztD/MyrA+oFrFoKU9jhhX3mhR3XY5bQOYSf/I8QKWqcXz42D+lfJtNIwqlG1V/xVjYqkgoXPJbE2QxKiKhl4sc2+8cyDTx/T01jHG5Zj4VKc8f8B6vc+gIN2xdvyxDCWqrerr2Sx8h+hSmC0ME84cWAI32x6ft3SRDvzlGd53Bn4/i0/7X+o2CohWN38GqGOzcO3BPrO8uNdwCOfS1DsOVJCQOoG2T1tguaMnIbek9RdieGOTNvNNb1vbPOrFiADVxbqjuGyhtmRbOtHNNwovKd35hGCaJeYCvORXgffnECF+D9W/mVnWlqiVWSaxBYxInLTyiHcwxLvDLyi4LPvjXgULb7+z/0aY51xzmYNpTF1vyANIOcYdGy/Pb1R+z0sJYm+ypTwasRXXnKh6mOHxeJTIPDkVosmH9Tzci7XzGtSifHHufaV0p4ORvqlAOmD190DwqNEnfV1kJDFKDADwEPySGSllbKGZ/j8PZHyw1FOXf73GwSur3qA6G2VZ3uatmLoPG7StfPVKZ6DDQPYneVh9eMO8lrPJHewrzH2f+PF5N/63t6jyCDP2woX/pPfbcZbRESSVQOxG1zaU=
-  file: 
-    - build/windows-amd64.zip
-    - build/macosx-amd64.tar.gz
-    - build/linux-amd64.tar.gz
-  skip_cleanup: true
-  on:
-    tags: true
+  - provider: releases
+    api_key:
+      secure: UX6lS6ApVSzuC3TU/KTImouwetB+JWNRrUi9rkDRdaT+d32LKVs+V1rkIDav2JfXIBuAR7I0tedG7NUoHYzJy9Zv9NztD/MyrA+oFrFoKU9jhhX3mhR3XY5bQOYSf/I8QKWqcXz42D+lfJtNIwqlG1V/xVjYqkgoXPJbE2QxKiKhl4sc2+8cyDTx/T01jHG5Zj4VKc8f8B6vc+gIN2xdvyxDCWqrerr2Sx8h+hSmC0ME84cWAI32x6ft3SRDvzlGd53Bn4/i0/7X+o2CohWN38GqGOzcO3BPrO8uNdwCOfS1DsOVJCQOoG2T1tguaMnIbek9RdieGOTNvNNb1vbPOrFiADVxbqjuGyhtmRbOtHNNwovKd35hGCaJeYCvORXgffnECF+D9W/mVnWlqiVWSaxBYxInLTyiHcwxLvDLyi4LPvjXgULb7+z/0aY51xzmYNpTF1vyANIOcYdGy/Pb1R+z0sJYm+ypTwasRXXnKh6mOHxeJTIPDkVosmH9Tzci7XzGtSifHHufaV0p4ORvqlAOmD190DwqNEnfV1kJDFKDADwEPySGSllbKGZ/j8PZHyw1FOXf73GwSur3qA6G2VZ3uatmLoPG7StfPVKZ6DDQPYneVh9eMO8lrPJHewrzH2f+PF5N/63t6jyCDP2woX/pPfbcZbRESSVQOxG1zaU=
+    file_glob: true
+    file: build/*
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: script
+    script: make docker_dockerhub_publish
+    on:
+      branch: master
+      tags: true
 branches:
   only:
   - master
