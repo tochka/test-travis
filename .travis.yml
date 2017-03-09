@@ -9,6 +9,7 @@ matrix:
   include:
 # DOCKER 
     - os: linux
+      dist: precise
       sudo: required
       services:
         - docker  
@@ -18,10 +19,12 @@ matrix:
           - GIT_BRANCH=$TRAVIS_BRANCH
           - TARGET_OS=linux
     - os: linux
+      dist: precise
       env:
         global:
          - TARGET_OS=windows
     - os: linux
+      dist: precise    
       env:
         global:
          - TARGET_OS=darwin         
