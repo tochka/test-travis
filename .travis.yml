@@ -1,14 +1,10 @@
-language: go
-go:
-        - 1.7.x
-
 matrix:
-  exclude:
-    # exclude default build
-    - dummy: true
   include:
 # DOCKER 
     - os: linux
+      language: go
+      go:
+        - 1.7.x
       dist: precise
       sudo: required
       services:
@@ -19,11 +15,17 @@ matrix:
           - GIT_BRANCH=$TRAVIS_BRANCH
           - TARGET_OS=linux
     - os: linux
+      language: go
+      go:
+        - 1.7.x    
       dist: precise
       env:
         global:
          - TARGET_OS=windows
     - os: linux
+      language: go
+      go:
+        - 1.7.x    
       dist: precise    
       env:
         global:
