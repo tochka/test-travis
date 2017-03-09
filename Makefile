@@ -21,19 +21,24 @@ get:
 
 test_all:
 	go test ./...
-	
-build_artifact:
+
+clear_artifact:
+	rm -rf artf
+build_artifact: clear_artifact clear
 	GOOS=$(TARGET_OS) GOARCH=amd64 go build  --ldflags '-extldflags "-static"' -o build/$(ARTF)/$(ARTF)
+	mkdir artf
 	@if [ "$(TARGET_OS)" = "windows" ]; then \
-		echo "WINDOWS"; \
 		mv build/$(ARTF)/$(ARTF) build/$(ARTF)/$(ARTF).exe; \
 		cd build/ && zip -r windows-amd64.zip . && cd .. ; \
+		mv build/windows-amd64.zip artf ; \
+	fi 
+	@if [ "$(TARGET_OS)" = "linux" ]; then \
+		tar -zcvf artf/linux-amd64.tar.gz -C build/ . ;  \
 	fi
-	@if [ "$(TARGET_OS)" != "windows" ]; then \
-		HUMAN_NAME=["$(TARGET_OS)" = "darwin"] && "macos" || "linux"; \
-		echo "NOT WINDOWS $(HUMAN_NAME)"; \		
-		tar -zcvf build/$(HUMAN_NAME)-amd64.tar.gz -C build/ . ; \
+	@if [ "$(TARGET_OS)" = "darwin" ]; then \
+		tar -zcvf artf/macosx-amd64.tar.gz -C build/ . ;  \
 	fi
+
 build_docker: build_artifact
 	docker build -t $(IMAGENAME) --build-arg GIT_COMMIT=$(GIT_COMMIT) --build-arg GIT_BRANCH=$(GIT_BRANCH) .
 
