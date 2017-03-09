@@ -3,8 +3,7 @@ matrix:
 # DOCKER 
     - os: linux
       language: go
-      go:
-        - 1.7.x
+      go: 1.7.5
       dist: precise
       sudo: required
       services:
@@ -16,16 +15,14 @@ matrix:
           - TARGET_OS=linux
     - os: linux
       language: go
-      go:
-        - 1.7.x    
+      go: 1.7.5    
       dist: precise
       env:
         global:
          - TARGET_OS=windows
     - os: linux
       language: go
-      go:
-        - 1.7.x    
+      go: 1.7.5    
       dist: precise    
       env:
         global:
