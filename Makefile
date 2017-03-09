@@ -25,7 +25,7 @@ test_all:
 build_artifact:
 	GOOS=$(TARGET_OS) GOARCH=amd64 go build  --ldflags '-extldflags "-static"' -o build/$(ARTF)/$(ARTF)
 	@if [[ "$(TARGET_OS)" = "windows" ]; then \
-		mv build/$(ARTF)/$(ARTF) build/$(ARTF)/$(ARTF).exe
+		mv build/$(ARTF)/$(ARTF) build/$(ARTF)/$(ARTF).exe;
 		cd build/ && zip -r windows-amd64.zip . && cd ..;
 	else \
 		HUMAN_NAME=["$(TARGET_OS)" = "darwin" && "macos" || "linux";
