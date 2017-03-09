@@ -4,7 +4,7 @@ ARG GIT_COMMIT=unkown
 ARG GIT_BRANCH=unkown
 LABEL git-commit=$GIT_COMMIT
 LABEL git-branch=$GIT_BRANCH
-ADD build/linux_x64/test .
+ADD build/linux-amd64/test .
 
 ENTRYPOINT ["/test"]
 
