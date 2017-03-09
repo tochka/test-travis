@@ -6,8 +6,10 @@ matrix:
       go: 1.7.5
       dist: precise
       sudo: required
-      services:
-        - docker  
+      addons:
+        apt:
+          packages:
+            - docker
       env:
         global:
           - GIT_COMMIT=$TRAVIS_COMMIT
