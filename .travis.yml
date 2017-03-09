@@ -4,11 +4,10 @@ matrix:
     - os: linux
       language: go
       go: 1.7.5
-      dist: precise
+      dist: trusty
+      group: stable
       sudo: required
-      addons:
-        apt:
-          packages:
+      services:
             - docker
       env:
         global:
@@ -16,6 +15,7 @@ matrix:
           - GIT_BRANCH=$TRAVIS_BRANCH
           - TARGET_OS=linux
     - os: linux
+      sudo: false
       language: go
       go: 1.7.5    
       dist: precise
@@ -23,6 +23,7 @@ matrix:
         global:
          - TARGET_OS=windows
     - os: linux
+      sudo: false
       language: go
       go: 1.7.5    
       dist: precise    

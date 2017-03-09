@@ -2,7 +2,7 @@
 ARTF =test
 IMAGENAME=$(ARTF)
 DOCKERHUB_REPOSITORY=tochka/$(IMAGENAME)
-TARGET_OS ?= $(shell uname -s)
+TARGET_OS ?= $(shell uname -s | tr A-Z a-z)
 
 define tag_docker
 	@if [ "$(GIT_BRANCH)" = "master" ]; then \
