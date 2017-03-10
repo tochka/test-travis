@@ -13,16 +13,11 @@ pull_requests:
   do_not_increment_build_number: true
 
 install:  
-  - echo %PATH%
-  - echo %GOPATH%
   - set PATH=%GOPATH%\bin;c:\go\bin;c:\MinGW\bin\;%PATH%
   - go version
-  - go env
-  - echo %APPVEYOR_REPO_TAG_NAME%
-  - echo %APPVEYOR_REPO_BRANCH%
   - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
-  - dir C:\MinGW\msys\1.0
-  - C:\MinGW\msys\1.0\msys.bat install msys-zip
+  - C:\MinGW\msys\1.0\msys.bat
+  - C:\MinGW\msys\1.0\msys.bat install -y msys-zip
   - make get
   
 test_script:
