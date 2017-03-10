@@ -10,7 +10,7 @@ environment:
 install:  
   - echo %PATH%
   - echo %GOPATH%
-  - set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
+  - set PATH=%GOPATH%\bin;c:\go\bin;c:\MinGW\bin\;%PATH%
   - go version
   - go env
   - echo %APPVEYOR_REPO_TAG_NAME%
