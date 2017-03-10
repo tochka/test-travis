@@ -26,5 +26,5 @@ test_script:
   - dir artf
   - mingw32-make test_all
   
-  artifacts:
+artifacts:
   - path: artf\windows-amd64.zip
