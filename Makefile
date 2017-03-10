@@ -35,7 +35,7 @@ build_artifact: clear_artifact clear
 	@if [ "$(TARGET_OS)" = "windows" ]; then \
 		mv build/$(ARTF)/$(ARTF) build/$(ARTF)/$(ARTF).exe; \
 		cd build/ && zip -r windows-amd64.zip . && cd .. ; \
-		mv build/windows-amd64.zip artf ; \
+		mv build/windows-amd64.zip artf/ ; \
 	fi 
 	@if [ "$(TARGET_OS)" = "linux" ]; then \
 		tar -zcvf artf/linux-amd64.tar.gz -C build/ . ;  \
