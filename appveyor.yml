@@ -15,6 +15,7 @@ install:
   - go env
   - echo %APPVEYOR_REPO_TAG_NAME%
   - echo %APPVEYOR_REPO_BRANCH%
+  - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
   - make get
 
 build_script:  
