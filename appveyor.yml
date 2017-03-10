@@ -22,4 +22,9 @@ build_script:
    - mingw32-make build_artifact
 
 test_script:
+  - dir
+  - dir artf
   - mingw32-make test_all
+  
+  artifacts:
+  - path: artf\windows-amd64.zip
