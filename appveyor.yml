@@ -13,19 +13,17 @@ pull_requests:
   do_not_increment_build_number: true
 
 install:  
-  - set PATH=%GOPATH%\bin;c:\go\bin;c:\MinGW\bin\;%PATH%
+  - set PATH=%GOPATH%\bin;c:\go\bin;c:\MinGW\bin\;c:\MinGW\msys\1.0\bin;%PATH%
   - go version
-  - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
-  - C:\MinGW\msys\1.0\msys.bat --help
-  - C:\MinGW\msys\1.0\msys.bat install -y msys-zip
-  - make get
+  - mingw-get install msys-zip
+  - mingw32-make.exe get
   
 test_script:
-  - make test_all
+  - mingw32-make.exe test_all
   
 build_script:  
-   - make
-   - make build_artifact
+   - mingw32-make.exe
+   - mingw32-make.exe build_artifact
 
 artifacts:
   - path: build\windows-amd64.zip
