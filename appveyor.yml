@@ -1,11 +1,11 @@
-version: {build}
+version: "{build}"
 
 platform: x64
 
-environment:  
-  GOPATH: c:\gopath
-
 clone_folder: c:\gopath\src\github.com\tochka\test-travis
+
+environment:
+  GOPATH: c:\gopath
 
 install:  
   - echo %PATH%
