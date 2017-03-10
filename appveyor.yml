@@ -31,5 +31,6 @@ deploy:
   auth_token:
     secure: aOL6vz6w0YQLy7nsEtDX0R41x4XDEFm0puwb1jCP+8c7R+IZ+0OXkNejNtnZjFV4
   artifact: artf\windows-amd64.zip
+  force_update: true
   on:
     appveyor_repo_tag: true        # deploy on tag push only
