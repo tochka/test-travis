@@ -1,6 +1,6 @@
 version: "{build}"
 
-platform: x64
+os: Windows Server 2012 R2
 
 clone_folder: c:\gopath\src\github.com\tochka\test-travis
 
@@ -15,15 +15,14 @@ pull_requests:
 install:  
   - set PATH=%GOPATH%\bin;c:\go\bin;c:\MinGW\bin\;c:\MinGW\msys\1.0\bin;%PATH%
   - go version
-  - mingw-get install msys-zip
-  - mingw32-make.exe get
-  
+  - mingw32-make get
+
+build_script:
+   - mingw32-make
+   - mingw32-make build_artifact
+
 test_script:
-  - mingw32-make.exe test_all
-  
-build_script:  
-   - mingw32-make.exe
-   - mingw32-make.exe build_artifact
+  - mingw32-make test_all
 
 artifacts:
   - path: build\windows-amd64.zip
