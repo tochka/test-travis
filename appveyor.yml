@@ -19,12 +19,19 @@ install:
 
 build_script:
    - mingw32-make
-   - mingw32-make build_artifact
 
 test_script:
   - dir
   - dir artf
   - mingw32-make test_all
-  
-artifacts:
-  - path: artf\windows-amd64.zip
+
+before_deploy:
+   - mingw32-make build_artifact
+
+deploy:
+  provider: GitHub
+  auth_token:
+    secure: aOL6vz6w0YQLy7nsEtDX0R41x4XDEFm0puwb1jCP+8c7R+IZ+0OXkNejNtnZjFV4
+  artifact: artf\windows-amd64.zip
+  on:
+    appveyor_repo_tag: true        # deploy on tag push only
