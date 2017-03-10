@@ -19,6 +19,5 @@ install:
   - make get
 
 build_script:  
-  - make
-  - make test_all
-  - make build_artifacts
+   - make test_all
+   - make build_artifact
