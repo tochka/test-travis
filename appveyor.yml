@@ -21,8 +21,6 @@ build_script:
    - mingw32-make
 
 test_script:
-  - dir
-  - dir artf
   - mingw32-make test_all
 
 before_deploy:
