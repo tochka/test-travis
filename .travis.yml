@@ -33,9 +33,7 @@ matrix:
         global:
          - TARGET_OS=darwin      
   exclude:
-    - env:
-        global:
-         - TARGET_OS=windows
+    - env: TARGET_OS=windows
          
 before_install:
         - 'if [ "$TARGET_OS" = "linux" ]; then 
