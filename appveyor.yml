@@ -16,7 +16,7 @@ install:
   - set PATH=%GOPATH%\bin;c:\go\bin;c:\MinGW\bin\;%PATH%
   - go version
   - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
-  - C:\MinGW\msys\1.0\msys.bat
+  - C:\MinGW\msys\1.0\msys.bat --help
   - C:\MinGW\msys\1.0\msys.bat install -y msys-zip
   - make get
   
