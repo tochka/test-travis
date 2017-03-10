@@ -1,0 +1,23 @@
+version: {build}
+
+platform: x64
+
+environment:  
+  GOPATH: c:\gopath
+
+clone_folder: c:\gopath\src\github.com\tochka\test-travis
+
+install:  
+  - echo %PATH%
+  - echo %GOPATH%
+  - set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
+  - go version
+  - go env
+  - echo TAG: %APPVEYOR_REPO_TAG_NAME%
+  - echo BRANCH: %APPVEYOR_REPO_BRANCH%
+  - make get
+
+build_script:  
+  - make
+  - make test_all
+  - make build_artifacts
