@@ -21,7 +21,8 @@ install:
   - echo %APPVEYOR_REPO_TAG_NAME%
   - echo %APPVEYOR_REPO_BRANCH%
   - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
-  - dir c:\MinGW\
+  - dir C:\MinGW\msys\1.0
+  - C:\MinGW\msys\1.0\msys.bat install msys-zip
   - make get
   
 test_script:
@@ -29,8 +30,6 @@ test_script:
   
 build_script:  
    - make
-
-before_deploy:
    - make build_artifact
 
 artifacts:
