@@ -16,8 +16,17 @@ install:
   - echo %APPVEYOR_REPO_TAG_NAME%
   - echo %APPVEYOR_REPO_BRANCH%
   - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
+  - dir c:\MinGW\bin\
   - make get
-
+  
+test_script:
+  - make test_all
+  
 build_script:  
-   - make test_all
+   - make
+
+before_deploy:
    - make build_artifact
+
+artifacts:
+  - path: build\windows-amd64.zip
