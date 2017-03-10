@@ -25,7 +25,10 @@ test_script:
 
 before_deploy:
    - mingw32-make build_artifact
-
+   
+artifacts:
+  - path: artf\windows-amd64.zip
+  
 deploy:
   provider: GitHub
   auth_token:
