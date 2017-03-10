@@ -13,14 +13,6 @@ matrix:
           - GIT_COMMIT=$TRAVIS_COMMIT
           - GIT_BRANCH=$TRAVIS_BRANCH
           - TARGET_OS=linux
-# WINDOWS           
-    - os: linux
-      sudo: false
-      language: go
-      go: 1.7.5    
-      env:
-        global:
-         - TARGET_OS=windows
 # MACOS         
     - os: linux
       sudo: false
