@@ -21,7 +21,7 @@ install:
   - echo %APPVEYOR_REPO_TAG_NAME%
   - echo %APPVEYOR_REPO_BRANCH%
   - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
-  - dir c:\MinGW\bin\
+  - dir c:\MinGW\
   - make get
   
 test_script:
