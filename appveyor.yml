@@ -19,12 +19,10 @@ install:
 
 build_script:
    - mingw32-make
+   - mingw32-make build_artifact
 
 test_script:
   - mingw32-make test_all
-
-before_deploy:
-   - mingw32-make build_artifact
    
 artifacts:
   - path: artf\windows-amd64.zip
