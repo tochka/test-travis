@@ -23,6 +23,3 @@ build_script:
 
 test_script:
   - mingw32-make test_all
-
-artifacts:
-  - path: build\windows-amd64.zip
