@@ -13,8 +13,8 @@ install:
   - set PATH=%GOPATH%\bin;c:\go\bin;%PATH%
   - go version
   - go env
-  - echo "TAG: %APPVEYOR_REPO_TAG_NAME%"
-  - echo "BRANCH: %APPVEYOR_REPO_BRANCH%"
+  - echo %APPVEYOR_REPO_TAG_NAME%
+  - echo %APPVEYOR_REPO_BRANCH%
   - make get
 
 build_script:  
