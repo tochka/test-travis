@@ -10,6 +10,6 @@ func TestSum_ReturnVal(t *testing.T){
    )
    actual:=sum(a,b)
    if actual != expected {
-    t.FatalNow()
+    t.FailNow()
    }
 }
