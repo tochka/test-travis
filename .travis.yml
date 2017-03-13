@@ -52,7 +52,3 @@ deploy:
       branch: master
       tags: true
       condition: "$TARGET_OS = linux"
-branches:
-  only:
-  - master
-  - /^v\d+/
