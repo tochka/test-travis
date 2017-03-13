@@ -11,6 +11,5 @@ func TestSum_ReturnVal(t *testing.T){
    actual:=Sum(a,b)
    if actual != expected {
     t.FatalNow()
-    
    }
-  }
+}
