@@ -13,8 +13,9 @@ pull_requests:
   do_not_increment_build_number: true
 
 install:  
-  - dir C:\mingw-w64
-  - set PATH=%GOPATH%\bin;c:\go\bin;C:\mingw-w64\bin\;c:\MinGW\msys\1.0\bin;%PATH%
+  - dir C:\mingw-w64\i686-6.3.0-posix-dwarf-rt_v5-rev1
+   - dir C:\mingw-w64\i686-5.3.0-posix-dwarf-rt_v4-rev0 
+  - set PATH=%GOPATH%\bin;c:\go\bin;C:\mingw-w64\i686-6.3.0-posix-dwarf-rt_v5-rev1\bin\;c:\MinGW\msys\1.0\bin;%PATH%
   - g++ -v
   - go version
   - mingw32-make get
