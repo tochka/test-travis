@@ -25,7 +25,7 @@ get:
 	go get -v -d -t  ./...
 
 test_all:
-	go test ./...
+	go test ./... -coverprofile=coverage.txt -covermode=atomic
 
 clear_artifact:
 	rm -rf artf
