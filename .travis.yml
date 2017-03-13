@@ -36,7 +36,7 @@ script:
                 make build_docker;
           fi'
 after_script:
-        - bash <(curl -s https://codecov.io/bash)
+        - bash <(curl -s https://codecov.io/bash) -t fb333ecd-d800-4de0-a001-4f4990e20eca
 deploy:
   - provider: releases
     api_key:
