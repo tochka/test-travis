@@ -28,6 +28,7 @@ before_install:
            fi'
 install:
         - make get
+        - echo $DOCKERHUB_USERNAME
 script:
         - make test_all
         - make build_artifact
