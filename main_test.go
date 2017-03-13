@@ -8,7 +8,7 @@ func TestSum_ReturnVal(t *testing.T){
     b=5
     expected=9
    )
-   actual:=Sum(a,b)
+   actual:=sum(a,b)
    if actual != expected {
     t.FatalNow()
    }
