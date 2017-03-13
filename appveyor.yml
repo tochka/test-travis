@@ -13,7 +13,9 @@ pull_requests:
   do_not_increment_build_number: true
 
 install:  
-  - set PATH=%GOPATH%\bin;c:\go\bin;c:\MinGW\bin\;c:\MinGW\msys\1.0\bin;%PATH%
+  - choco install -y mingw
+  - dir C:\tools\mingw64
+  - set PATH=%GOPATH%\bin;c:\go\bin;C:\tools\mingw64\bin\;c:\MinGW\msys\1.0\bin;%PATH%
   - g++ -v
   - go version
   - mingw32-make get
