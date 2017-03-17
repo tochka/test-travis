@@ -46,11 +46,13 @@ deploy:
     skip_cleanup: true
     on:
       tags: true
+# Deploy tag docker image      
   - provider: script
     script: make docker_dockerhub_publish
     on:
       tags: true
       condition: "$TARGET_OS = linux"
+# Deploy latest docker image      
   - provider: script
     script: make docker_dockerhub_publish
     on:
