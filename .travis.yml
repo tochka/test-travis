@@ -49,6 +49,9 @@ deploy:
   - provider: script
     script: make docker_dockerhub_publish
     on:
-      branch: master
       tags: true
+      condition: "$TARGET_OS = linux"
+  - provider: script
+    script: make docker_dockerhub_publish
+    on:
       condition: "$TARGET_OS = linux"
