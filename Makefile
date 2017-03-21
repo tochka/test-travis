@@ -2,6 +2,7 @@
 ARTF =test
 IMAGENAME=$(ARTF)
 DOCKERHUB_REPOSITORY=tochka/$(IMAGENAME)
+VERSION=$(shell git describe --tags --always)
 
 ifeq ($(OS),Windows_NT)
 TARGET_OS ?= windows
@@ -30,7 +31,7 @@ test_all:
 clear_artifact:
 	rm -rf artf
 build_artifact: clear_artifact clear
-	GOOS=$(TARGET_OS) GOARCH=amd64 go build  --ldflags '-extldflags "-static"' -o build/$(ARTF)/$(ARTF)
+	GOOS=$(TARGET_OS) GOARCH=amd64 go build  --ldflags '-X main.Version=$(VERSION) -extldflags "-static"' -o build/$(ARTF)/$(ARTF)
 	mkdir artf
 	@if [ "$(TARGET_OS)" = "windows" ]; then \
 		mv build/$(ARTF)/$(ARTF) build/$(ARTF)/$(ARTF).exe; \
