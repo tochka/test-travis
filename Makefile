@@ -22,7 +22,11 @@ define tag_docker
 clear:
 	rm -rf build
 
-get:
+$(GOPATH)/src/gopkg.in/virgilsecurity/virgil-crypto-go.v4/virgil_crypto_go.go:
+	go get -d gopkg.in/virgilsecurity/virgil-crypto-go.v4
+	cd $$GOPATH/src/gopkg.in/virgilsecurity/virgil-crypto-go.v4 ;	 make BRANCH=2.1.2
+
+get: $(GOPATH)/src/gopkg.in/virgilsecurity/virgil-crypto-go.v4/virgil_crypto_go.go
 	go get -v -d -t  ./...
 
 test_all:
