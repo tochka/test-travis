@@ -23,7 +23,7 @@ matrix:
          - TARGET_OS=darwin      
          
 before_install:
-        - apt-get install -y swig
+        - sudo apt-get install -y swig
         - 'if [ "$TARGET_OS" = "linux" ]; then 
                 docker login -u="$DOCKERHUB_USERNAME" -p="$DOCKERHUB_PASSWORD";
            fi'
